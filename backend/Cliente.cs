@@ -46,7 +46,7 @@ public class Cliente {
             }
         }
 
-        public void votar(Servidor servidor){
+        public void votar(ref Servidor servidor){
             while(true) {
                 int op=0; 
 
