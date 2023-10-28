@@ -20,6 +20,5 @@ namespace backend {
         public int QtdVotosValidos {get; set;}
         public int QtdVotosNulos {get; set;}
         public int QtdVotosBrancos {get; set;}
-               
     }
 }

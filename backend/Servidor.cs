@@ -59,19 +59,6 @@ namespace backend {
                             clienteSocket.Receive(buffer);
 
                             int numCandidato = BitConverter.ToInt32(buffer, 0);
-
-                            if (numCandidato<0)
-                                votos.QtdVotosNulos++;
-                            else if (numCandidato==0)
-                                votos.QtdVotosBrancos++;
-                            else {
-                                foreach(Candidato x in candidatos) {
-                                    if (numCandidato==x.NumPartido) {                                        
-                                        x.QtdVotos++;
-                                        votos.QtdVotosTotal++;
-                                    }
-                                }
-                            }
                         }
 
                         Console.WriteLine($"[{this.Ipv4} Desconectado . . .]");
@@ -81,6 +68,22 @@ namespace backend {
                 }
         }
 
+        public void selecionarCandidato(int x) {
+            
+            if (x<0)
+                votos.QtdVotosNulos++;
+            else if (x==0)
+                votos.QtdVotosBrancos++;
+            else {
+                foreach(Candidato candidato in candidatos) {
+                    if (x==candidato.NumPartido) {                                        
+                        candidato.QtdVotos++;
+                        votos.QtdVotosValidos++;
+                        votos.QtdVotosTotal++;
+                    }
+                }
+            }
+        }
         public void listarCandidatos() {
             
             foreach(Candidato x in candidatos) {

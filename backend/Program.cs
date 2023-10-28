@@ -11,6 +11,7 @@ namespace backend
                 Console.WriteLine("[1]. Cadastrar candidato.");
                 Console.WriteLine("[2]. Listar Candidatos.");
                 Console.WriteLine("[3]. Listar resultados.");
+                Console.WriteLine("[4]. Escolher candidato.");
 
                 Console.Write("Opcao: ");
                 int op = int.Parse(Console.ReadLine());
@@ -26,6 +27,10 @@ namespace backend
 
                     case 3:
                         servidor.listarVotos();
+                    break;
+
+                    case 4:
+                        servidor.selecionarCandidato(13);
                     break;
                 }
             }

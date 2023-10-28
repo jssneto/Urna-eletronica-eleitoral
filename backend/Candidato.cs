@@ -32,7 +32,7 @@ namespace backend {
 
             Console.WriteLine($"{this.NomeCompleto} - {this.NumPartido} - {this.NomePartido} - {this.Coligacao}");
             Console.WriteLine($"{this.GrauInstrucao} - {this.Ocupacao} - {this.Idade} - {this.CidadeNasc}");
-            Console.WriteLine($"{this.EstadoCivil} - {this.Genero} - {this.Raca} - {this.BensDeclarados}\n");
+            Console.WriteLine($"{this.EstadoCivil} - {this.Genero} - {this.Raca} - {this.BensDeclarados}");
             Console.WriteLine("Quant. Votos obtidos: {0}", qtdVotos);
         }
 
