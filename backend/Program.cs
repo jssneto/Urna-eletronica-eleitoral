@@ -32,6 +32,10 @@ namespace backend
                     case 4:
                         servidor.selecionarCandidato(13);
                     break;
+
+                    case 5:
+                        servidor.executar();
+                    break;
                 }
             }
         }

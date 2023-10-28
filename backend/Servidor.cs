@@ -58,7 +58,26 @@ namespace backend {
                             byte[] buffer = new byte[1024];
                             clienteSocket.Receive(buffer);
 
-                            int numCandidato = BitConverter.ToInt32(buffer, 0);
+                            int op = BitConverter.ToInt32(buffer, 0);
+
+                            switch(op) {
+                                /*
+                                    case 1:
+                                                
+                                    break;
+
+                                    case 2:
+                                    break;
+
+                                    case 3:
+                                    break;
+                                */
+                                    case 4:            
+                                        clienteSocket.Receive(buffer);
+                                        selecionarCandidato(BitConverter.ToInt32(buffer, 0));
+                                        listarVotos();
+                                    break;
+                            }
                         }
 
                         Console.WriteLine($"[{this.Ipv4} Desconectado . . .]");
@@ -86,8 +105,12 @@ namespace backend {
         }
         public void listarCandidatos() {
             
-            foreach(Candidato x in candidatos) {
-                x.apresentarCandidato();
+            if (candidatos.Count==0)
+                Console.WriteLine("Lista vazia! Nao candidatos cadastrados.");
+            else {
+                foreach(Candidato x in candidatos) {
+                    x.apresentarCandidato();
+                }
             }
         }
         public void cadastrarCandidatos(Candidato obj) {
