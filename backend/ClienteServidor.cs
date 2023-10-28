@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
@@ -47,7 +48,7 @@ namespace backend {
                         socket.Bind(ipEndPoint);
                         socket.Listen(10);
 
-                        socket clienteSocket = null;
+                        Socket clienteSocket;
                         while(true) {
                             Console.WriteLine($"[{this.Ipv4}] Executando . . .");
                             clienteSocket = socket.Accept();
@@ -55,10 +56,10 @@ namespace backend {
                             byte[] buffer = new byte[1024];
                             clienteSocket.Receive(buffer);
 
-                            Console.WriteLine(Enconding.ASCII.GetString(buffer));
+                            Console.WriteLine(Encoding.ASCII.GetString(buffer));
                         }
 
-                        Console.WriteLine($"[{this.Ipv4} Desconectado . . .]")
+                        Console.WriteLine($"[{this.Ipv4} Desconectado . . .]");
                         clienteSocket.Close();
                 } catch(Exception ex) {
                     Console.WriteLine(ex);
@@ -94,7 +95,10 @@ namespace backend {
             try {
                 socket.Connect(ipEndPoint);
 
-                socket.Send("Ola mundo!");
+                byte[] buffer = new byte[1024];
+                buffer = Encoding.ASCII.GetBytes("Ola mundo!");
+
+                socket.Send(buffer);
                 socket.Close();
 
             } catch(Exception ex) {
