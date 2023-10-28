@@ -11,7 +11,6 @@ namespace backend {
         private string ocupacao;
         private string raca;
         private int idade;
-        private double bensDeclarados;
 
         public Pessoa() {
 
@@ -23,10 +22,9 @@ namespace backend {
             this.Raca = "N/D";
             this.Ocupacao = "N/D";
             this.Idade = 0;
-            this.BensDeclarados = 0.0;
         }
 
-            public Pessoa(string nomeCompleto, string grauInstrucao, string cidadeNasc, string genero, string estadoCivil, string raca, string ocupacao, int idade, double bensDeclarados) {
+            public Pessoa(string nomeCompleto, string grauInstrucao, string cidadeNasc, string genero, string estadoCivil, string raca, string ocupacao, int idade) {
 
             this.NomeCompleto = nomeCompleto;
             this.GrauInstrucao = grauInstrucao;
@@ -36,7 +34,6 @@ namespace backend {
             this.Raca = raca;
             this.Ocupacao = ocupacao;
             this.Idade = idade;
-            this.BensDeclarados = bensDeclarados;
         }
 
         // Proprieades setters e getters
@@ -49,6 +46,5 @@ namespace backend {
         public string Raca {get; set;}
         public string Ocupacao {get; set;}
         public int Idade {get; set;}
-        public double BensDeclarados {get; set;}
     }
 }
