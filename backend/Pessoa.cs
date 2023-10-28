@@ -24,8 +24,7 @@ namespace backend {
             this.Idade = 0;
         }
 
-            public Pessoa(string nomeCompleto, string grauInstrucao, string cidadeNasc, string genero, string estadoCivil, string raca, string ocupacao, int idade) {
-
+        public Pessoa(string nomeCompleto, string grauInstrucao, string cidadeNasc, string genero, string estadoCivil, string raca, string ocupacao, int idade) {
             this.NomeCompleto = nomeCompleto;
             this.GrauInstrucao = grauInstrucao;
             this.CidadeNasc = cidadeNasc;

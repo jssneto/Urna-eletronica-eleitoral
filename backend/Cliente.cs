@@ -70,6 +70,7 @@ public class Cliente {
                         Console.WriteLine("\nErro! Insira a opção no formato correto.");
                     }
                     catch(ExcecaoOpcaoInvalida ex){
+                        // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
                         Console.WriteLine($"\nErro! {ex.Message}");
                     }
                     catch(Exception ex){
@@ -130,6 +131,7 @@ public class Cliente {
                                 Console.WriteLine("\nErro! Insira a opção no formato correto.");
                             }
                             catch(ExcecaoOpcaoInvalida ex){
+                                // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
                                 Console.WriteLine($"\nErro! {ex.Message}");
                             }
                             catch(Exception ex){
@@ -165,6 +167,7 @@ public class Cliente {
                                 Console.WriteLine("\nErro! Insira a opção no formato correto.");
                             }
                             catch(ExcecaoOpcaoInvalida ex){
+                                // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
                                 Console.WriteLine($"\nErro! {ex.Message}");
                             }
                             catch(Exception ex){
@@ -204,6 +207,7 @@ public class Cliente {
                                 Console.WriteLine("\nErro! Insira a opção no formato correto.");
                             }
                             catch(ExcecaoOpcaoInvalida ex){
+                                // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
                                 Console.WriteLine($"\nErro! {ex.Message}");
                             }
                             catch(Exception ex){
