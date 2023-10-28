@@ -1,0 +1,4 @@
+- Selecionar candidatos;
+- Calcular total dos votos (votos-válidos, votos-nulos, votos-brancos);
+- Filtrar total de votos por (partido, UF, genêro);
+- Exportar dados em logs;
