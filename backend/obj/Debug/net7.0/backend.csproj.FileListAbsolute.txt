@@ -13,3 +13,18 @@ C:\Users\nicol\OneDrive\Documentos\Urna-eletronica-eleitoral\backend\obj\Debug\n
 C:\Users\nicol\OneDrive\Documentos\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\backend.pdb
 C:\Users\nicol\OneDrive\Documentos\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\backend.genruntimeconfig.cache
 C:\Users\nicol\OneDrive\Documentos\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\ref\backend.dll
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\bin\Debug\net7.0\backend.exe
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\bin\Debug\net7.0\backend.deps.json
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\bin\Debug\net7.0\backend.runtimeconfig.json
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\bin\Debug\net7.0\backend.dll
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\bin\Debug\net7.0\backend.pdb
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\backend.csproj.AssemblyReference.cache
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\backend.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\backend.AssemblyInfoInputs.cache
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\backend.AssemblyInfo.cs
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\backend.csproj.CoreCompileInputs.cache
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\backend.dll
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\refint\backend.dll
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\backend.pdb
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\backend.genruntimeconfig.cache
+C:\Users\pedro\OneDrive\Área de Trabalho\Programação Socket\Urna-eletronica-eleitoral\backend\obj\Debug\net7.0\ref\backend.dll
