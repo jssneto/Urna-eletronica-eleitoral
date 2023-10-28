@@ -12,6 +12,7 @@ namespace back {
         private string raca;
         private int idade;
         private double bensDeclarados;
+
         public Pessoa() {
 
             this.NomeCompleto = "N/D";
@@ -26,7 +27,7 @@ namespace back {
         }
 
         // Proprieades setters e getters
-
+        
         public string NomeCompleto {get; set;}
         public string GrauInstrucao {get; set;}
         public string CidadeNasc {get; set;}

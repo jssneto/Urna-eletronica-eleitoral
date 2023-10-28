@@ -2,10 +2,12 @@ using System;
 
 namespace back {
     public sealed class Candidato : Pessoa {
+
         private string nomePartido;
         private string coligacao;
         private int numPartido;
         private int qtdVotos;   
+        
         public Candidato() {
 
             this.NomePartido = "N/D";
