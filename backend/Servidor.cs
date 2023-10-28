@@ -9,6 +9,7 @@ namespace backend {
         private IPAddress ipv4;
         private IPEndPoint ipEndPoint;
         private int porta;
+        private List<Candidato> candidatos;
 
         public Servidor() {
             
@@ -17,9 +18,9 @@ namespace backend {
             this.ipEndPoint = new IPEndPoint(Ipv4, Porta);
         }
 
-        public Servidor(IPAddress ipv4, int porta) {
+        public Servidor(string ipv4, int porta) {
             
-            this.Ipv4 = ipv4;
+            this.Ipv4 = IPAddress.Parse(ipv4);
             this.Porta = porta;
             this.ipEndPoint = new IPEndPoint(Ipv4, Porta);
         }
@@ -56,7 +57,8 @@ namespace backend {
                             byte[] buffer = new byte[1024];
                             clienteSocket.Receive(buffer);
 
-                            Console.WriteLine(Encoding.ASCII.GetString(buffer));
+                            int numCandidato = BitConverter.ToInt32(buffer, 0);
+
                         }
 
                         Console.WriteLine($"[{this.Ipv4} Desconectado . . .]");
@@ -65,45 +67,8 @@ namespace backend {
                     Console.WriteLine(ex);
                 }
         }
-    }
-    public class Cliente {
-        private IPAddress ipv4;
-        private int porta;
-        private IPEndPoint ipEndPoint;
-        public Cliente() {
+        public bool cadastrarCandidatos(Candidato obj) {
 
-            this.Ipv4 = IPAddress.Parse("192.168.1.10");
-            this.Porta = 8000;
-            this.ipEndPoint = new IPEndPoint(Ipv4, Porta);
-        }
-
-        public Cliente(IPAddress ipv4, int porta) {
-            
-            this.Ipv4 = ipv4;
-            this.Porta = porta;
-            this.ipEndPoint = new IPEndPoint(Ipv4, Porta);
-        }
-
-        // Setters e Getters
-        public IPAddress Ipv4 {get; set;}
-        public int Porta {get; set;}
-
-        public void conectar() {
-
-            Socket socket = new Socket(ipv4.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-            try {
-                socket.Connect(ipEndPoint);
-
-                byte[] buffer = new byte[1024];
-                buffer = Encoding.ASCII.GetBytes("Ola mundo!");
-
-                socket.Send(buffer);
-                socket.Close();
-
-            } catch(Exception ex) {
-                Console.WriteLine(ex);
-            }
         }
     }
 }
