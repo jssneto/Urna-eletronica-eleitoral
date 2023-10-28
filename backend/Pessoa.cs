@@ -21,9 +21,22 @@ namespace backend {
             this.Genero = "N/D";
             this.EstadoCivil = "N/D";
             this.Raca = "N/D";
-            this.ocupacao = "N/D";
+            this.Ocupacao = "N/D";
             this.Idade = 0;
             this.BensDeclarados = 0.0;
+        }
+
+        public Pessoa(string nomeCompleto, string grauInstrucao, string cidadeNasc, string genero, string estadoCivil, string raca, string ocupacao, int idade, double bensDeclarados) {
+
+            this.NomeCompleto = nomeCompleto;
+            this.GrauInstrucao = grauInstrucao;
+            this.CidadeNasc = cidadeNasc;
+            this.Genero = genero;
+            this.EstadoCivil = estadoCivil;
+            this.Raca = raca;
+            this.Ocupacao = ocupacao;
+            this.Idade = idade;
+            this.BensDeclarados = bensDeclarados;
         }
 
         // Proprieades setters e getters

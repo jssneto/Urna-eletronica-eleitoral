@@ -6,13 +6,19 @@ namespace backend {
         private string nomePartido;
         private string coligacao;
         private int numPartido;
-        private int qtdVotos;   
-        
+        private int qtdVotos;  
         public Candidato() {
 
             this.NomePartido = "N/D";
             this.Coligacao = "N/D";
             this.NumPartido = 0;
+        }
+
+        public Candidato(string nomePartido, string coligacao, int numPartido, string nomeCompleto, string grauInstrucao, string cidadeNasc, string genero, string estadoCivil, string raca, string ocupacao, int idade, double bensDeclarados) : base(nomeCompleto, grauInstrucao, cidadeNasc, genero, estadoCivil, raca, ocupacao, idade, bensDeclarados) {
+
+            this.NomePartido = nomePartido;
+            this.Coligacao = coligacao;
+            this.NumPartido = numPartido;
         }
 
         // Proprieades setters e getters
@@ -22,7 +28,7 @@ namespace backend {
         public int QtdVotos {get; set;}
 
         // Métodos
-        public void apresentaCandidato() {
+        public void apresentarCandidato() {
 
             Console.WriteLine($"{this.NomeCompleto} - {this.NumPartido} - {this.NomePartido} - {this.Coligacao}");
             Console.WriteLine($"{this.GrauInstrucao} - {this.Ocupacao} - {this.Idade} - {this.CidadeNasc}");

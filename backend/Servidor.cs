@@ -9,7 +9,8 @@ namespace backend {
         private IPAddress ipv4;
         private IPEndPoint ipEndPoint;
         private int porta;
-        private List<Candidato> candidatos;
+        private List<Candidato> candidatos = new List<Candidato>();
+        private Votos votos = new Votos();
 
         public Servidor() {
             
@@ -59,6 +60,18 @@ namespace backend {
 
                             int numCandidato = BitConverter.ToInt32(buffer, 0);
 
+                            if (numCandidato<0)
+                                votos.QtdVotosNulos++;
+                            else if (numCandidato==0)
+                                votos.QtdVotosBrancos++;
+                            else {
+                                foreach(Candidato x in candidatos) {
+                                    if (numCandidato==x.NumPartido) {                                        
+                                        x.QtdVotos++;
+                                        votos.QtdVotosTotal++;
+                                    }
+                                }
+                            }
                         }
 
                         Console.WriteLine($"[{this.Ipv4} Desconectado . . .]");
@@ -67,8 +80,24 @@ namespace backend {
                     Console.WriteLine(ex);
                 }
         }
-        public bool cadastrarCandidatos(Candidato obj) {
 
+        public void listarCandidatos() {
+            
+            foreach(Candidato x in candidatos) {
+                x.apresentarCandidato();
+            }
+        }
+        public void cadastrarCandidatos(Candidato obj) {
+
+            candidatos.Add(obj);            
+        }
+
+        public void listarVotos() {
+
+            Console.WriteLine("Quant. total de votos (Total): {0}", votos.QtdVotosTotal);
+            Console.WriteLine("Quant. total de votos (validos): {0}", votos.QtdVotosValidos);
+            Console.WriteLine("Quant. total de votos (brancos): {0}", votos.QtdVotosBrancos);
+            Console.WriteLine("Quant. total de votos (nulos): {0}", votos.QtdVotosNulos);
         }
     }
 }
