@@ -34,9 +34,11 @@ public class Cliente {
                 socket.Connect(ipEndPoint);
 
                 byte[] buffer = new byte[1024];
-                buffer = Encoding.ASCII.GetBytes("Ola mundo!");
+                buffer = BitConverter.GetBytes(4);
 
                 socket.Send(buffer);
+
+                socket.Send(BitConverter.GetBytes(13));
                 socket.Close();
 
             } catch(Exception ex) {
