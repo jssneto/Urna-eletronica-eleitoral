@@ -31,16 +31,16 @@ public class Cliente {
             int op = menu();
             Socket socket = new Socket(Ipv4.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             
-            try {
-                socket.Connect(ipEndPoint);
+            while(true){
+                try {
+                    socket.Connect(ipEndPoint);
 
-                byte[] buffer = new byte[5024];
-                buffer = BitConverter.GetBytes(op);
-                socket.Send(buffer);
+                    byte[] buffer = new byte[5024];
+                    buffer = BitConverter.GetBytes(op);
+                    socket.Send(buffer);
 
-                Array.Clear(buffer, 0, buffer.Length);
-                switch(op) {
-                    case 1:
+                    Array.Clear(buffer, 0, buffer.Length);
+                    if(op == 1){
                         Console.Write("Partido: ");
                         int partido = int.Parse(Console.ReadLine());
                         socket.Send(BitConverter.GetBytes(partido));                        
@@ -48,22 +48,23 @@ public class Cliente {
                         Array.Clear(buffer, 0, buffer.Length);
                         socket.Receive(buffer);
                         Console.WriteLine(Encoding.ASCII.GetString(buffer));
-                    break;
-                    case 2:
-                        servidor.listarCandidatos();
-                    break;
-                    case 3:
+                    }
+                    else if(op == 2)
+                            servidor.listarCandidatos();
+                    else{
                         socket.Close();
-                    break;                            
+                        break;                            
+                    }
+
+                    socket.Receive(buffer);
+                    Console.WriteLine(Encoding.ASCII.GetString(buffer));                    
+
+                    socket.Close();
                 }
-
-                socket.Receive(buffer);
-                Console.WriteLine(Encoding.ASCII.GetString(buffer));                    
-
-                socket.Close();
-            }
-            catch(Exception ex){
-                Console.WriteLine($"Erro! {ex.Message}");
+                catch(Exception ex){
+                    Console.WriteLine($"Erro! {ex.Message}");
+                    break;
+                }
             }
         }
         public static int menu(){
