@@ -10,7 +10,7 @@ public class Cliente {
         private IPEndPoint ipEndPoint;
         public Cliente() {
 
-            this.Ipv4 = IPAddress.Parse("192.168.1.10");
+            this.Ipv4 = IPAddress.Parse("192.168.15.9");
             this.Porta = 8000;
             this.ipEndPoint = new IPEndPoint(Ipv4, Porta);
         }
@@ -29,39 +29,54 @@ public class Cliente {
         public void conectar() {
 
             Socket socket = new Socket(Ipv4.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
             try {
                 socket.Connect(ipEndPoint);
 
-                byte[] buffer = new byte[1024];
-                buffer = BitConverter.GetBytes(4);
+                int op = menu();
 
+                byte[] buffer = new byte[5024];
+                buffer = BitConverter.GetBytes(op);
                 socket.Send(buffer);
 
-                socket.Send(BitConverter.GetBytes(13));
-                socket.Close();
+                Array.Clear(buffer, 0, buffer.Length);
+                switch(op) {
+                    case 1:
+                        Console.Write("Partido: ");
+                        int partido = int.Parse(Console.ReadLine());
+                        socket.Send(BitConverter.GetBytes(partido));                        
 
+                        Array.Clear(buffer, 0, buffer.Length);
+                        socket.Receive(buffer);
+                        Console.WriteLine(Encoding.ASCII.GetString(buffer));
+                        
+                    break;   
+
+                    case 2:
+                    break;                                 
+                }
+
+                socket.Receive(buffer);
+                Console.WriteLine(Encoding.ASCII.GetString(buffer));                    
+
+                socket.Close();
             } catch(Exception ex) {
                 Console.WriteLine(ex);
             }
         }
-
-        public void votar(ref Servidor servidor){
+        public int menu(){
             int op=0;
 
-            while(op != 5) { 
-                Console.WriteLine("[1]. Cadastrar candidato.");
-                Console.WriteLine("[2]. Listar Candidatos.");
-                Console.WriteLine("[3]. Listar resultados.");
-                Console.WriteLine("[4]. Escolher candidato.");
-                Console.WriteLine("[5]. Sair.");
+            while(op != 3) { 
+                Console.WriteLine("[1]. Escolher candidato."); //
+                Console.WriteLine("[2]. Listar resultados.");
+                Console.WriteLine("[3]. Sair."); //
                 Console.Write("Opcão: ");
 
                 while(true){
                     try{
                         op = int.Parse(Console.ReadLine());
 
-                        if(op < 1 || op > 5){
+                        if(op < 1 || op > 3){
                             throw new ExcecaoOpcaoInvalida("Entre com uma opção válida: ");
                         }
                         else
@@ -78,155 +93,8 @@ public class Cliente {
                         Console.WriteLine($"\nErro! {ex.Message}");
                     }
                 }
-
-                while(true){
-                    string partido, nome, grauInstrucao, cidade, profissao, genero, estadoCivil, raca;
-                    int numero, idade, opGenero, opEstadoCivil, opRaca;
-
-                    if(op == 5){
-                        Console.WriteLine("\nSaindo...");
-                        break;
-                    }
-                    else if(op == 4)
-                        servidor.selecionarCandidato(13);
-                    else if(op == 3)
-                        servidor.listarVotos();
-                    else if(op == 2)
-                        servidor.listarCandidatos();
-                    else{
-                        Console.Write("\nA qual partido o candidato pertence: ");
-                        partido = Console.ReadLine();
-
-                        Console.Write("\nInsira o número do partido: ");
-                        numero = int.Parse(Console.ReadLine());
-
-                        Console.Write("\nInsira o nome do candidato: ");
-                        nome = Console.ReadLine();
-
-                        Console.Write("\nQual o seu grau de instrução: ");
-                        grauInstrucao = Console.ReadLine();
-
-                        Console.Write("Qual a sua cidade de nascimento: ");
-                        cidade = Console.ReadLine();
-
-                        Console.Write("Qual o seu gênero:\n1) Masculino\n2) Feminino\n3) Outro");
-                        while(true){    
-                            try{
-                                opGenero = int.Parse(Console.ReadLine());
-
-                                if (opGenero == 1){
-                                    genero = "Masculino";
-                                    break;
-                                }
-                                else if (opGenero == 2){
-                                    genero = "Feminino";
-                                    break;
-                                }
-                                else if (opGenero == 3){
-                                    genero = "Outro";
-                                    break;
-                                }
-                                else
-                                    throw new ExcecaoOpcaoInvalida("Entre com uma opção válida: ");
-                            }
-                            catch(FormatException){
-                                Console.WriteLine("\nErro! Insira a opção no formato correto.");
-                            }
-                            catch(ExcecaoOpcaoInvalida ex){
-                                // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
-                                Console.Write($"\nErro! {ex.Message}");
-                            }
-                            catch(Exception ex){
-                                Console.WriteLine($"\nErro! {ex.Message}");
-                            }
-                        }
-
-                        Console.Write("Qual o seu estado cívil:\n1) Solteiro(a)\n2) Casado\n3) Divorciado\n4) Viúvo");
-                        while(true){
-                            try{
-                                opEstadoCivil = int.Parse(Console.ReadLine());
-
-                                if (opEstadoCivil == 1){
-                                    estadoCivil = "Solteiro";
-                                    break;
-                                }
-                                else if (opEstadoCivil == 2){
-                                    estadoCivil = "Casado";
-                                    break;
-                                }
-                                else if (opEstadoCivil == 3){
-                                    estadoCivil = "Divorciado";
-                                    break;
-                                }
-                                else if (opEstadoCivil == 4){
-                                    estadoCivil = "Viúvo";
-                                    break;
-                                }
-                                else
-                                    throw new ExcecaoOpcaoInvalida("Entre com uma opção válida: ");
-                            }
-                            catch(FormatException){
-                                Console.WriteLine("\nErro! Insira a opção no formato correto.");
-                            }
-                            catch(ExcecaoOpcaoInvalida ex){
-                                // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
-                                Console.Write($"\nErro! {ex.Message}");
-                            }
-                            catch(Exception ex){
-                                Console.WriteLine($"\nErro! {ex.Message}");
-                            }
-                        }
-
-                        Console.Write("Qual a sua raça:\n1) Branco\n2) Preto\n3) Pardo\n4) Amarelo\n5) Indígena");
-
-                        while(true){
-                            try{
-                                opRaca = int.Parse(Console.ReadLine());
-                                if (opRaca == 1){
-                                    raca = "Branco";
-                                    break;
-                                }
-                                else if (opRaca == 2){
-                                    raca = "Preto";
-                                    break;
-                                }
-                                else if (opRaca == 3){
-                                    raca = "Pardo";
-                                    break;
-                                }
-                                else if (opRaca == 4){
-                                    raca = "Amarelo";
-                                    break;
-                                }
-                                else if (opRaca == 5){
-                                    raca = "Indígena";
-                                    break;
-                                }
-                                else
-                                    throw new ExcecaoOpcaoInvalida("Entre com uma opção válida: ");
-                            }
-                            catch(FormatException){
-                                Console.WriteLine("\nErro! Insira a opção no formato correto.");
-                            }
-                            catch(ExcecaoOpcaoInvalida ex){
-                                // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
-                                Console.Write($"\nErro! {ex.Message}");
-                            }
-                            catch(Exception ex){
-                                Console.WriteLine($"\nErro! {ex.Message}");
-                            }
-                        }
-
-                        Console.Write("Qual a sua profissão: ");
-                        profissao = Console.ReadLine();
-
-                        Console.Write("Qual a sua idade: ");
-                        idade = int.Parse(Console.ReadLine());
-
-                        // chamando método para cadastrar o candidato
-                        servidor.cadastrarCandidatos(new Candidato(partido, numero, nome, grauInstrucao, cidade, genero, estadoCivil, raca, profissao, idade));
-                }
             }
+            // retorna opção escolhida pelo eleitor
+            return op;
         }
     }
-}
