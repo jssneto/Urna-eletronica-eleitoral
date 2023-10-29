@@ -24,6 +24,11 @@ namespace backend {
             this.Idade = 0;
         }
 
+        public Pessoa(string nomeCompleto, string genero){
+            this.NomeCompleto = nomeCompleto;            
+            this.Genero = genero;
+        }
+
         public Pessoa(string nomeCompleto, string grauInstrucao, string cidadeNasc, string genero, string estadoCivil, string raca, string ocupacao, int idade) {
             this.NomeCompleto = nomeCompleto;
             this.GrauInstrucao = grauInstrucao;
@@ -36,7 +41,6 @@ namespace backend {
         }
 
         // Proprieades setters e getters
-        
         public string NomeCompleto {get; set;}
         public string GrauInstrucao {get; set;}
         public string CidadeNasc {get; set;}

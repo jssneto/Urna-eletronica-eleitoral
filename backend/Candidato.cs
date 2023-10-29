@@ -8,13 +8,13 @@ namespace backend {
         private int qtdVotos;  
         public Candidato() {
 
-            this.NomePartido = "N/D";
+            this.NomePartido = "N/D";            
             this.NumPartido = 0;
         }
 
-        public Candidato(string nomePartido, int numPartido, string nomeCompleto, string grauInstrucao, string cidadeNasc, string genero, string estadoCivil, string raca, string ocupacao, int idade) : base(nomeCompleto, grauInstrucao, cidadeNasc, genero, estadoCivil, raca, ocupacao, idade) {
-
-            this.NomePartido = nomePartido;
+        public Candidato(string nomePartido, int numPartido, string nomeCompleto, string genero):base(nomeCompleto, genero) {
+            
+            this.NomePartido = nomePartido;            
             this.NumPartido = numPartido;
         }
 

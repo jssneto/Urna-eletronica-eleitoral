@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Text.Json;
 using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
@@ -45,7 +46,6 @@ namespace backend {
         public void executar() {
 
                 Socket socket = new Socket(Ipv4.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
                 try {
                         socket.Bind(ipEndPoint);
                         socket.Listen(10);
@@ -55,28 +55,23 @@ namespace backend {
                             Console.WriteLine($"[{this.Ipv4}] Executando . . .");
                             clienteSocket = socket.Accept();
 
-                            byte[] buffer = new byte[1024];
+                            byte[] buffer = new byte[5024];
                             clienteSocket.Receive(buffer);
 
-                            int op = BitConverter.ToInt32(buffer, 0);
+                            int op = BitConverter.ToInt32(buffer, 0);                            
 
-                            switch(op) {
-                                /*
-                                    case 1:
-                                                
-                                    break;
-
-                                    case 2:
-                                    break;
-
-                                    case 3:
-                                    break;
-                                */
-                                    case 4:            
-                                        clienteSocket.Receive(buffer);
+                            switch(op) {                                
+                                    case 1:                                        
+                                        clienteSocket.Receive(buffer);                                        
                                         selecionarCandidato(BitConverter.ToInt32(buffer, 0));
-                                        listarVotos();
+                                        Array.Clear(buffer, 0, buffer.Length);
+                                        clienteSocket.Send(Encoding.ASCII.GetBytes("Voto Confirmado!"));
                                     break;
+
+                                    default:
+                                        Array.Clear(buffer, 0, buffer.Length);
+                                        clienteSocket.Send(Encoding.ASCII.GetBytes(listarVotos()));
+                                    break;         
                             }
                         }
 
@@ -104,12 +99,12 @@ namespace backend {
             }
         }
         public void listarCandidatos() {
-            
+                        
             if (candidatos.Count==0)
                 Console.WriteLine("Lista vazia! Nao candidatos cadastrados.");
             else {
                 foreach(Candidato x in candidatos) {
-                    x.apresentarCandidato();
+                    Console.WriteLine(x.NomeCompleto+"|"+x.NomePartido+"|"+x.NumPartido);
                 }
             }
         }
@@ -118,13 +113,11 @@ namespace backend {
             candidatos.Add(obj);            
         }
 
-        public void listarVotos() {
+        public string listarVotos() {
 
-            Console.WriteLine("Quant. total de votos (Total): {0}", votos.QtdVotosTotal);
-            Console.WriteLine("Quant. total de votos (validos): {0}", votos.QtdVotosValidos);
-            Console.WriteLine("Quant. total de votos (brancos): {0}", votos.QtdVotosBrancos);
-            Console.WriteLine("Quant. total de votos (nulos): {0}", votos.QtdVotosNulos);
-        }
+            string x = "Quant. total de votos (Total): "+votos.QtdVotosTotal+"Quant. total de votos (validos): "+votos.QtdVotosValidos+"Quant. total de votos (brancos): "+votos.QtdVotosBrancos+"Quant. total de votos (nulos): "+votos.QtdVotosNulos;
+            return x;
+        }        
     }
 }
 

@@ -8,7 +8,8 @@ namespace backend
             Servidor servidor = new Servidor();
             Cliente cliente = new Cliente();
             
-            cliente.votar(ref servidor);
+            servidor.executar();
+            cliente.menu();
         }
     }
 }
