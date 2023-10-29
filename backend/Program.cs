@@ -10,7 +10,7 @@ namespace backend
             
             servidor.executar();
 
-            Cliente.menu();
+            cliente.menu();
 
             cliente.conectar(ref servidor);
         }

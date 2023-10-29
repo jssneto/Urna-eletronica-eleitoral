@@ -40,7 +40,9 @@ public class Cliente {
                     socket.Send(buffer);
 
                     Array.Clear(buffer, 0, buffer.Length);
+                    Console.WriteLine("CHEGOU AQUI!");
                     if(op == 1){
+                        Console.WriteLine("AGORA AQUI!");
                         Console.Write("Partido: ");
                         int partido = int.Parse(Console.ReadLine());
                         socket.Send(BitConverter.GetBytes(partido));                        
@@ -58,7 +60,7 @@ public class Cliente {
 
                     socket.Receive(buffer);
                     Console.WriteLine(Encoding.ASCII.GetString(buffer));                    
-
+ 
                     socket.Close();
                 }
                 catch(Exception ex){
@@ -67,35 +69,38 @@ public class Cliente {
                 }
             }
         }
-        public static int menu(){
-            int op=0;
+        public int menu(){
+            int op = 0;
 
-            Console.WriteLine("\n[1]. Escolher candidato."); //
-            Console.WriteLine("[2]. Listar resultados.");
-            Console.WriteLine("[3]. Sair."); //
-            Console.Write("Opcão: ");
+            while (true){
+                Console.WriteLine("\n[1]. Escolher candidato.");
+                Console.WriteLine("[2]. Listar resultados.");
+                Console.WriteLine("[3]. Sair.");
+                Console.Write("Opcão: ");
 
-            while(true){
                 try{
                     op = int.Parse(Console.ReadLine());
 
-                    if(op < 1 || op > 3){
+                    if (op < 1 || op > 3){
                         throw new ExcecaoOpcaoInvalida("Entre com uma opção válida: ");
                     }
-                    else
-                        break;
+
+                    if (op == 3){
+                        break; // saia do loop quando o eleitor escolher "3" (Sair)
+                    }
                 }
-                catch(FormatException){
+                catch (FormatException){
                     Console.WriteLine("\nErro! Insira a opção no formato correto.");
                 }
-                catch(ExcecaoOpcaoInvalida ex){
-                    // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
-                    Console.Write($"\nErro! {ex.Message}");
+                catch (ExcecaoOpcaoInvalida ex){
+                    // Tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
+                    Console.WriteLine($"\nErro! {ex.Message}");
                 }
-                catch(Exception ex){
+                catch (Exception ex){
                     Console.WriteLine($"\nErro! {ex.Message}");
                 }
             }
+
             return op;
         }
     }
