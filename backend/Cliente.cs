@@ -47,39 +47,41 @@ public class Cliente {
         }
 
         public void votar(ref Servidor servidor){
-            while(true) {
-                int op=0; 
+            int op=0;
 
+            while(op != 5) { 
                 Console.WriteLine("[1]. Cadastrar candidato.");
                 Console.WriteLine("[2]. Listar Candidatos.");
                 Console.WriteLine("[3]. Listar resultados.");
                 Console.WriteLine("[4]. Escolher candidato.");
                 Console.WriteLine("[5]. Sair.");
+                Console.Write("Opcão: ");
 
                 while(true){
-                    Console.Write("Opcão: ");
                     try{
                         op = int.Parse(Console.ReadLine());
 
                         if(op < 1 || op > 5){
-                            throw new ExcecaoOpcaoInvalida("\nEntre com uma opção válida:");
+                            throw new ExcecaoOpcaoInvalida("Entre com uma opção válida: ");
                         }
-                        break;
+                        else
+                            break;
                     }
                     catch(FormatException){
                         Console.WriteLine("\nErro! Insira a opção no formato correto.");
                     }
                     catch(ExcecaoOpcaoInvalida ex){
                         // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
-                        Console.WriteLine($"\nErro! {ex.Message}");
+                        Console.Write($"\nErro! {ex.Message}");
                     }
                     catch(Exception ex){
-                        Console.WriteLine($"nErro! {ex.Message}");
+                        Console.WriteLine($"\nErro! {ex.Message}");
+                    }
                 }
 
                 while(true){
-                    string partido="", nome="", grauInstrucao="", cidade="", profissao="", genero="", estadoCivil="", raca="";
-                    int numero=0, idade=0, opGenero=0, opEstadoCivil=0, opRaca=0;
+                    string partido, nome, grauInstrucao, cidade, profissao, genero, estadoCivil, raca;
+                    int numero, idade, opGenero, opEstadoCivil, opRaca;
 
                     if(op == 5){
                         Console.WriteLine("\nSaindo...");
@@ -125,14 +127,14 @@ public class Cliente {
                                     break;
                                 }
                                 else
-                                    throw new ExcecaoOpcaoInvalida("Entre com uma opção válida:");
+                                    throw new ExcecaoOpcaoInvalida("Entre com uma opção válida: ");
                             }
                             catch(FormatException){
                                 Console.WriteLine("\nErro! Insira a opção no formato correto.");
                             }
                             catch(ExcecaoOpcaoInvalida ex){
                                 // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
-                                Console.WriteLine($"\nErro! {ex.Message}");
+                                Console.Write($"\nErro! {ex.Message}");
                             }
                             catch(Exception ex){
                                 Console.WriteLine($"\nErro! {ex.Message}");
@@ -161,14 +163,14 @@ public class Cliente {
                                     break;
                                 }
                                 else
-                                    throw new ExcecaoOpcaoInvalida("Entre com uma opção válida:");
+                                    throw new ExcecaoOpcaoInvalida("Entre com uma opção válida: ");
                             }
                             catch(FormatException){
                                 Console.WriteLine("\nErro! Insira a opção no formato correto.");
                             }
                             catch(ExcecaoOpcaoInvalida ex){
                                 // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
-                                Console.WriteLine($"\nErro! {ex.Message}");
+                                Console.Write($"\nErro! {ex.Message}");
                             }
                             catch(Exception ex){
                                 Console.WriteLine($"\nErro! {ex.Message}");
@@ -201,14 +203,14 @@ public class Cliente {
                                     break;
                                 }
                                 else
-                                    throw new ExcecaoOpcaoInvalida("Entre com uma opção válida:");
+                                    throw new ExcecaoOpcaoInvalida("Entre com uma opção válida: ");
                             }
                             catch(FormatException){
                                 Console.WriteLine("\nErro! Insira a opção no formato correto.");
                             }
                             catch(ExcecaoOpcaoInvalida ex){
                                 // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
-                                Console.WriteLine($"\nErro! {ex.Message}");
+                                Console.Write($"\nErro! {ex.Message}");
                             }
                             catch(Exception ex){
                                 Console.WriteLine($"\nErro! {ex.Message}");
@@ -223,7 +225,6 @@ public class Cliente {
 
                         // chamando método para cadastrar o candidato
                         servidor.cadastrarCandidatos(new Candidato(partido, numero, nome, grauInstrucao, cidade, genero, estadoCivil, raca, profissao, idade));
-                    }
                 }
             }
         }
