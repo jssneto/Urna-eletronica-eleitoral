@@ -9,7 +9,10 @@ namespace backend
             Cliente cliente = new Cliente();
             
             servidor.executar();
-            cliente.menu();
+
+            Cliente.menu();
+
+            cliente.conectar(ref servidor);
         }
     }
 }

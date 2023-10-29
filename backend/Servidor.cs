@@ -44,42 +44,48 @@ namespace backend {
             return ip;
         }
         public void executar() {
-
                 Socket socket = new Socket(Ipv4.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                try {
-                        socket.Bind(ipEndPoint);
-                        socket.Listen(10);
+                
+                Thread servidorThread = new Thread(() =>
+                {
+                
+                try{
+                    socket.Bind(ipEndPoint);
+                    socket.Listen(10);
 
-                        Socket clienteSocket;
-                        while(true) {
-                            Console.WriteLine($"[{this.Ipv4}] Executando . . .");
-                            clienteSocket = socket.Accept();
+                    Socket clienteSocket;
+                    while(true) {
+                        Console.WriteLine($"[{this.Ipv4}] Executando . . .");
+                        clienteSocket = socket.Accept();
 
-                            byte[] buffer = new byte[5024];
-                            clienteSocket.Receive(buffer);
+                        byte[] buffer = new byte[8192];
+                        clienteSocket.Receive(buffer);
 
-                            int op = BitConverter.ToInt32(buffer, 0);                            
+                        int op = BitConverter.ToInt32(buffer, 0);                            
 
-                            switch(op) {                                
-                                    case 1:                                        
-                                        clienteSocket.Receive(buffer);                                        
-                                        selecionarCandidato(BitConverter.ToInt32(buffer, 0));
-                                        Array.Clear(buffer, 0, buffer.Length);
-                                        clienteSocket.Send(Encoding.ASCII.GetBytes("Voto Confirmado!"));
-                                    break;
-
-                                    default:
-                                        Array.Clear(buffer, 0, buffer.Length);
-                                        clienteSocket.Send(Encoding.ASCII.GetBytes(listarVotos()));
-                                    break;         
-                            }
+                        switch(op){                                
+                                case 1:                                        
+                                    clienteSocket.Receive(buffer);                                        
+                                    selecionarCandidato(BitConverter.ToInt32(buffer, 0));
+                                    Array.Clear(buffer, 0, buffer.Length);
+                                    clienteSocket.Send(Encoding.ASCII.GetBytes("Voto Confirmado!"));
+                                break;
+                                default:
+                                    Array.Clear(buffer, 0, buffer.Length);
+                                    clienteSocket.Send(Encoding.ASCII.GetBytes(listarVotos()));
+                                break;         
                         }
 
                         Console.WriteLine($"[{this.Ipv4} Desconectado . . .]");
                         clienteSocket.Close();
-                } catch(Exception ex) {
+                    }
+                }
+                catch(Exception ex) {
                     Console.WriteLine(ex);
                 }
+                });
+
+                servidorThread.Start();
         }
 
         public void selecionarCandidato(int x) {

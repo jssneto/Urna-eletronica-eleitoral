@@ -26,13 +26,13 @@ public class Cliente {
         public IPAddress Ipv4 {get; set;}
         public int Porta {get; set;}
 
-        public void conectar() {
-
+        public void conectar(ref Servidor servidor) {
+            
+            int op = menu();
             Socket socket = new Socket(Ipv4.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            
             try {
                 socket.Connect(ipEndPoint);
-
-                int op = menu();
 
                 byte[] buffer = new byte[5024];
                 buffer = BitConverter.GetBytes(op);
@@ -48,53 +48,53 @@ public class Cliente {
                         Array.Clear(buffer, 0, buffer.Length);
                         socket.Receive(buffer);
                         Console.WriteLine(Encoding.ASCII.GetString(buffer));
-                        
-                    break;   
-
+                    break;
                     case 2:
-                    break;                                 
+                        servidor.listarCandidatos();
+                    break;
+                    case 3:
+                        socket.Close();
+                    break;                            
                 }
 
                 socket.Receive(buffer);
                 Console.WriteLine(Encoding.ASCII.GetString(buffer));                    
 
                 socket.Close();
-            } catch(Exception ex) {
-                Console.WriteLine(ex);
+            }
+            catch(Exception ex){
+                Console.WriteLine($"Erro! {ex.Message}");
             }
         }
-        public int menu(){
+        public static int menu(){
             int op=0;
 
-            while(op != 3) { 
-                Console.WriteLine("[1]. Escolher candidato."); //
-                Console.WriteLine("[2]. Listar resultados.");
-                Console.WriteLine("[3]. Sair."); //
-                Console.Write("Opcão: ");
+            Console.WriteLine("\n[1]. Escolher candidato."); //
+            Console.WriteLine("[2]. Listar resultados.");
+            Console.WriteLine("[3]. Sair."); //
+            Console.Write("Opcão: ");
 
-                while(true){
-                    try{
-                        op = int.Parse(Console.ReadLine());
+            while(true){
+                try{
+                    op = int.Parse(Console.ReadLine());
 
-                        if(op < 1 || op > 3){
-                            throw new ExcecaoOpcaoInvalida("Entre com uma opção válida: ");
-                        }
-                        else
-                            break;
+                    if(op < 1 || op > 3){
+                        throw new ExcecaoOpcaoInvalida("Entre com uma opção válida: ");
                     }
-                    catch(FormatException){
-                        Console.WriteLine("\nErro! Insira a opção no formato correto.");
-                    }
-                    catch(ExcecaoOpcaoInvalida ex){
-                        // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
-                        Console.Write($"\nErro! {ex.Message}");
-                    }
-                    catch(Exception ex){
-                        Console.WriteLine($"\nErro! {ex.Message}");
-                    }
+                    else
+                        break;
+                }
+                catch(FormatException){
+                    Console.WriteLine("\nErro! Insira a opção no formato correto.");
+                }
+                catch(ExcecaoOpcaoInvalida ex){
+                    // tratamento de exceção caso o usuário escolha uma opção diferente das opções disponíveis
+                    Console.Write($"\nErro! {ex.Message}");
+                }
+                catch(Exception ex){
+                    Console.WriteLine($"\nErro! {ex.Message}");
                 }
             }
-            // retorna opção escolhida pelo eleitor
             return op;
         }
     }
