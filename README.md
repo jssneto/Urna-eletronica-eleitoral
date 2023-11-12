@@ -1,18 +1,18 @@
 # Urna Eletrônica
 
-`CURSO` Sistemas de Informação
+`CURSO` Análise e Desenvolvimento de Sistemas
 
-`DISCIPLINA` Redes de Computadores
+`DISCIPLINA` PROGRAMAÇÃO VISUAL
 
 `PERÍODO` Quarto Período
 
 Implementação em linguagem C# de uma Urna Eletrônica em forma de aplicação cliente/servidor. O *software* simula um sistema de votação eletrônica para eleições, oferecendo uma solução prática para contagem de votos.
 
-## Integrantes
+## Integrante
 
-* Nicolas Matheus Ferreira
-* Pedro Siqueira Pereira Bitarães
+* José da Silva dos Santos Neto
+
 
 ## Orientador
 
-* Marco Antônio da Silva Barbosa
+* Daniel Ferreira de Barros Junior
